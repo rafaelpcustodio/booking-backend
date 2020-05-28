@@ -15,8 +15,7 @@ import static com.booking.interfaces.adapter.amqp.enums.MessageHeader.EVENT_TYPE
 class BookingDeleteFlowConfiguration {
 
     @Bean
-    Binding bindingDirectBookingExchangeWithBookingDeleteQueue(final HeadersExchange bookingExchange,
-                                                                      final Queue bookingDeleteQueue) {
+    Binding bookingDeleteBinding(final HeadersExchange bookingExchange, final Queue bookingDeleteQueue) {
         return BindingBuilder
                 .bind(bookingDeleteQueue)
                 .to(bookingExchange)
@@ -25,7 +24,7 @@ class BookingDeleteFlowConfiguration {
     }
 
     @Bean
-    Queue bookingDelete(@Value("${queue.bookingDeleteQueue}") final String deleteQueue) {
-        return new Queue(deleteQueue);
+    Queue bookingDeleteQueue(@Value("${queue.bookingDelete}") final String queue) {
+        return new Queue(queue);
     }
 }

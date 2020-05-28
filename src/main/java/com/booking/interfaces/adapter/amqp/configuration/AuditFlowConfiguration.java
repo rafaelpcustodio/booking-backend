@@ -19,7 +19,7 @@ class AuditFlowConfiguration {
     }
 
     @Bean
-    Queue messageAudit(@Value("${queue.messageAuditQueue}") final String auditQueue) {
-        return new Queue(auditQueue);
+    Queue messageAuditQueue(@Value("${queue.audit}") final String queue) {
+        return new Queue(queue);
     }
 }

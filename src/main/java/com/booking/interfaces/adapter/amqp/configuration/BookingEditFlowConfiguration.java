@@ -16,8 +16,7 @@ import static com.booking.interfaces.adapter.amqp.enums.MessageHeader.EVENT_TYPE
 class BookingEditFlowConfiguration {
 
     @Bean
-    Binding bindingDirectBookingExchangeWithBookingEditQueue(final HeadersExchange bookingExchange,
-                                                                    final Queue bookingEditQueue) {
+    Binding bookingEditBinding(final HeadersExchange bookingExchange, final Queue bookingEditQueue) {
         return BindingBuilder
                 .bind(bookingEditQueue)
                 .to(bookingExchange)
@@ -26,8 +25,7 @@ class BookingEditFlowConfiguration {
     }
 
     @Bean
-    Queue bookingEdit(@Value("${queue.bookingEditQueue}") final String editQueue) {
-        return new Queue(editQueue);
+    Queue bookingEditQueue(@Value("${queue.bookingEdit}") final String queue) {
+        return new Queue(queue);
     }
-
 }
