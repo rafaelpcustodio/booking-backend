@@ -131,7 +131,7 @@ public class BookingController {
             @ApiResponse(code = 502, message = "An error occurred when communicating with external service")
     })
     @DeleteMapping("/bookings/{bookingId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deleteBookingsById(@PathVariable final String bookingId) {
 
         deleteBooking.execute(bookingId);

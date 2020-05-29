@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 public class ResponseBookingDTO {
+    private String id;
     private String passengerName;
     private String passengerContactNumber;
     private OffsetDateTime pickupTime;
@@ -29,6 +30,7 @@ public class ResponseBookingDTO {
 
     public static ResponseBookingDTO toResponse(final Booking bookingEntity) {
         return ResponseBookingDTO.builder()
+                .id(bookingEntity.getBookingId())
                 .waitingTime(bookingEntity.getWaitingTime())
                 .tripWayPoints(TripWayPointDTO.toResponseList(bookingEntity.getTripWayPoints()).orElse(Collections.emptyList()))
                 .rating(bookingEntity.getRating())

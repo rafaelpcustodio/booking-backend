@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestBookingDTO {
+    private String id;
     private String passengerName;
     private String passengerContactNumber;
     private OffsetDateTime pickupTime;
@@ -27,6 +28,7 @@ public class RequestBookingDTO {
     private List<TripWayPointDTO> tripWayPoints;
     public static Booking toEntity(final RequestBookingDTO request) {
         return Booking.builder()
+                .bookingId(request.getId())
                 .waitingTime(request.getWaitingTime())
                 .tripWayPoints(TripWayPointDTO.toEntityList(request.getTripWayPoints()).orElse(Collections.emptyList()))
                 .rating(request.getRating())
