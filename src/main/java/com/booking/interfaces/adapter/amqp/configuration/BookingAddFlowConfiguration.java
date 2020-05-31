@@ -24,7 +24,7 @@ class BookingAddFlowConfiguration {
     }
 
     @Bean
-    Queue bookingAddQueue(@Value("${queue.bookingAdd}") final String queue) {
+    Queue bookingAddQueue(@Value("${spring.rabbitmq.queue.bookingAdd}") final String queue) {
         return new Queue(queue);
     }
 }

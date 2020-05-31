@@ -1,0 +1,22 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    exchange:
+      messageExchange: fanout-exchange
+      bookingExchange: headers-exchange
+    queue:
+      bookingAdd: BookingAddQueue
+      bookingEdit: BookingEditQueue
+      bookingDelete: BookingDeleteQueue
+      audit: MessageAuditQueue
+  data:
+    mongodb:
+      uri: mongodb+srv://rafael-custodio:L5caO6Hynh1ChlZF@cluster0-e3d60.mongodb.net/test
+      database: booking-api
+  security:
+    user:
+      name:
+      password: password

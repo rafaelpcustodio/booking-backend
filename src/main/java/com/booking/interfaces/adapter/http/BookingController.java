@@ -3,11 +3,10 @@ package com.booking.interfaces.adapter.http;
 import com.booking.entity.booking.Booking;
 import com.booking.interfaces.adapter.http.dto.ResponseBookingDTO;
 import com.booking.interfaces.adapter.http.dto.RequestBookingDTO;
-import com.booking.interfaces.adapter.http.exceptions.NoBookingFoundException;
 import com.booking.usecases.CreateBooking;
 import com.booking.usecases.DeleteBooking;
 import com.booking.usecases.UpdateBooking;
-import com.booking.usecases.GetBookings;
+import com.booking.usecases.GetBooking;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -37,7 +36,7 @@ import java.util.List;
 @Api(value = "Bookings", tags = {"Bookings"})
 public class BookingController {
 
-    private final GetBookings getBookings;
+    private final GetBooking getBooking;
     private final UpdateBooking updateBooking;
     private final DeleteBooking deleteBooking;
     private final CreateBooking createBooking;
@@ -53,8 +52,7 @@ public class BookingController {
     })
     @GetMapping("/bookings")
     public ResponseEntity<List<ResponseBookingDTO>> getBookings() {
-
-        final List<Booking> bookings = getBookings.execute();
+        final List<Booking> bookings = getBooking.execute();
 
         return ResponseEntity.status(HttpStatus.OK).body(ResponseBookingDTO.toResponseList(bookings));
     }
@@ -72,7 +70,7 @@ public class BookingController {
     @GetMapping("/bookings/{bookingId}")
     public ResponseEntity<ResponseBookingDTO> getBookingsById(@PathVariable final String bookingId) {
 
-        final Booking bookingsWithSameId = getBookings.executeWith(bookingId);
+        final Booking bookingsWithSameId = getBooking.executeWith(bookingId);
 
         return ResponseEntity.status(HttpStatus.OK).body(ResponseBookingDTO.toResponse(bookingsWithSameId));
     }

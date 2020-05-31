@@ -10,7 +10,7 @@ import com.booking.interfaces.adapter.serialization.JacksonConfiguration;
 import com.booking.usecases.CreateBooking;
 import com.booking.usecases.DeleteBooking;
 import com.booking.usecases.UpdateBooking;
-import com.booking.usecases.GetBookings;
+import com.booking.usecases.GetBooking;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
@@ -43,7 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BookingControllerUnitTest {
     @Mock
-    private GetBookings getBookings;
+    private GetBooking getBooking;
     @Mock
     private UpdateBooking updateBooking;
     @Mock
@@ -57,7 +56,7 @@ public class BookingControllerUnitTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        BookingController bookingController = new BookingController(getBookings, updateBooking, deleteBooking, createBooking);
+        BookingController bookingController = new BookingController(getBooking, updateBooking, deleteBooking, createBooking);
         mockMvc = MockMvcBuilders.standaloneSetup(bookingController).build();
     }
 
@@ -66,7 +65,7 @@ public class BookingControllerUnitTest {
     public void shouldReturnOkStatusWithAllBookings() throws Exception {
         final List<ResponseBookingDTO> response = ResponseBookingDTOFixture.validBookings();
         final List<Booking> bookingEntities = BookingFixture.validBookingEntities();
-        when(getBookings.execute()).thenReturn(bookingEntities);
+        when(getBooking.execute()).thenReturn(bookingEntities);
         mockMvc.perform(get("/api/v1/bookings"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(response)));
@@ -78,7 +77,7 @@ public class BookingControllerUnitTest {
     public void shouldReturnOkStatusWithAllBookingsById() throws Exception {
         final ResponseBookingDTO response = ResponseBookingDTOFixture.validBooking();
         final Booking bookingEntity = BookingFixture.validBooking();
-        when(getBookings.executeWith(BOOKING_ID)).thenReturn(bookingEntity);
+        when(getBooking.executeWith(BOOKING_ID)).thenReturn(bookingEntity);
         mockMvc.perform(get("/api/v1/bookings/" + BOOKING_ID))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(response)));

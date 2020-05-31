@@ -24,7 +24,7 @@ class BookingDeleteFlowConfiguration {
     }
 
     @Bean
-    Queue bookingDeleteQueue(@Value("${queue.bookingDelete}") final String queue) {
+    Queue bookingDeleteQueue(@Value("${spring.rabbitmq.queue.bookingDelete}") final String queue) {
         return new Queue(queue);
     }
 }

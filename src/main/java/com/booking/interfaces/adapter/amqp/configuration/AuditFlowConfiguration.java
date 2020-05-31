@@ -19,7 +19,7 @@ class AuditFlowConfiguration {
     }
 
     @Bean
-    Queue messageAuditQueue(@Value("${queue.audit}") final String queue) {
+    Queue messageAuditQueue(@Value("${spring.rabbitmq.queue.audit}") final String queue) {
         return new Queue(queue);
     }
 }

@@ -18,25 +18,25 @@ public class ConsumerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerService.class);
 
     @Transactional
-    @RabbitListener(queues = "${queue.bookingAdd}")
+    @RabbitListener(queues = "${spring.rabbitmq.queue.bookingAdd}")
     public void handleBookingAddQueueMessage(final BookingAddEvent event) {
         LOGGER.info(String.format("Message received in Queue add: %s", event));
     }
 
     @Transactional
-    @RabbitListener(queues = "${queue.bookingDelete}")
+    @RabbitListener(queues = "${spring.rabbitmq.queue.bookingDelete}")
     public void handleBookingDeleteQueueMessage(final BookingDeleteEvent event) {
         LOGGER.info(String.format("Message received in Queue delete: %s", event));
     }
 
     @Transactional
-    @RabbitListener(queues = "${queue.bookingEdit}")
+    @RabbitListener(queues = "${spring.rabbitmq.queue.bookingEdit}")
     public void handleBookingEditQueueMessage(final BookingEditEvent event) {
         LOGGER.info(String.format("Message received in Queue edit: %s", event));
     }
 
     @Transactional
-    @RabbitListener(queues = "${queue.audit}")
+    @RabbitListener(queues = "${spring.rabbitmq.queue.audit}")
     public void handleBookingAuditQueueMessage(final BookingEvent event) {
         LOGGER.info(String.format("Message received in Queue audit: %s", event));
     }

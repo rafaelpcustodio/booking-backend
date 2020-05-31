@@ -18,12 +18,12 @@ public class BookingFlowConfiguration {
     }
 
     @Bean
-    FanoutExchange messageExchange(@Value("${exchange.messageExchange}") final String exchangeName) {
+    FanoutExchange messageExchange(@Value("${spring.rabbitmq.exchange.messageExchange}") final String exchangeName) {
         return new FanoutExchange(exchangeName);
     }
 
     @Bean
-    HeadersExchange bookingExchange(@Value("${exchange.bookingExchange}") final String exchangeName) {
+    HeadersExchange bookingExchange(@Value("${spring.rabbitmq.exchange.bookingExchange}") final String exchangeName) {
         return new HeadersExchange(exchangeName);
     }
 }

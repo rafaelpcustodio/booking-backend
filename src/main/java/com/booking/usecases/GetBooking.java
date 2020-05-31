@@ -11,7 +11,7 @@ import java.util.List;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class GetBookings {
+public class GetBooking {
 
     private final BookingsProvider bookingsProvider;
 
